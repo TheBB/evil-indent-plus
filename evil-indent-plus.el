@@ -7,7 +7,7 @@
 ;; Version: 1.0.0
 ;; Keywords: convenience evil
 ;; URL: http://github.com/TheBB/evil-indent-plus
-;; Package-Requires: ((evil "0"))
+;; Package-Requires: ((evil "0") (cl-lib "0.5"))
 ;;
 ;; This file is not part of GNU Emacs.
 
@@ -77,11 +77,11 @@ the last line where predicate holds."
                  (point-max)))
           (pt (point)))
       (when skip (forward-line direction))
-      (loop while (and (/= (point) bnd) (funcall predicate))
-            do (progn
-                 (when before (setq pt (point-at-bol)))
-                 (forward-line direction)
-                 (unless before (setq pt (point-at-bol)))))
+      (cl-loop while (and (/= (point) bnd) (funcall predicate))
+               do (progn
+                    (when before (setq pt (point-at-bol)))
+                    (forward-line direction)
+                    (unless before (setq pt (point-at-bol)))))
       pt)))
 
 (defun evil-indent-plus--same-indent-range (&optional point)
@@ -101,35 +101,35 @@ If `point' is supplied and non-nil it will return the begin and end of the block
 
 (defun evil-indent-plus--up-indent-range (&optional point)
   (let* ((range (evil-indent-plus--same-indent-range point))
-         (base (third range))
-         (begin (evil-indent-plus--seek (first range)
+         (base (cl-third range))
+         (begin (evil-indent-plus--seek (cl-first range)
                                         -1 nil nil
                                         'evil-indent-plus--geq-or-empty-p)))
-    (list begin (second range) base)))
+    (list begin (cl-second range) base)))
 
 (defun evil-indent-plus--up-down-indent-range (&optional point)
   (let* ((range (evil-indent-plus--same-indent-range point))
-         (base (third range))
-         (begin (evil-indent-plus--seek (first range)
+         (base (cl-third range))
+         (begin (evil-indent-plus--seek (cl-first range)
                                         -1 nil nil
                                         'evil-indent-plus--geq-or-empty-p))
-         (end (evil-indent-plus--seek (second range)
+         (end (evil-indent-plus--seek (cl-second range)
                                       1 nil nil
                                       'evil-indent-plus--geq-or-empty-p)))
     (list begin end base)))
 
 (defun evil-indent-plus--linify (range)
-  (let ((nbeg (save-excursion (goto-char (first range)) (point-at-bol)))
-        (nend (save-excursion (goto-char (second range)) (point-at-eol))))
+  (let ((nbeg (save-excursion (goto-char (cl-first range)) (point-at-bol)))
+        (nend (save-excursion (goto-char (cl-second range)) (point-at-eol))))
     (evil-range nbeg nend 'line)))
 
 (defun evil-indent-plus--extend (range)
-  (let ((begin (first range))
-        (end (second range))
+  (let ((begin (cl-first range))
+        (end (cl-second range))
         nend)
-    (setq nend (evil-plus-indent--seek end 1 t t 'evil-plus-indent--empty-line-p))
+    (setq nend (evil-indent-plus--seek end 1 t t 'evil-plus-indent--empty-line-p))
     (when (= nend end)
-      (setq begin (evil-plus-indent--seek begin -1 t t 'evil-plus-indent--empty-line-p)))
+      (setq begin (evil-indent-plus--seek begin -1 t t 'evil-plus-indent--empty-line-p)))
     (list begin nend)))
 
 (evil-define-text-object evil-indent-plus-i-indent (&optional count beg end type)
