@@ -132,36 +132,42 @@ If `point' is supplied and non-nil it will return the begin and end of the block
       (setq begin (evil-indent-plus--seek begin -1 t t 'evil-indent-plus--empty-line-p)))
     (list begin nend)))
 
+;;;###autoload (autoload 'evil-indent-plus-i-indent "evil-indent-plus" nil t)
 (evil-define-text-object evil-indent-plus-i-indent (&optional count beg end type)
   "Text object describing the block with the same (or greater) indentation as the current line,
 skipping empty lines."
   :type line
   (evil-indent-plus--linify (evil-indent-plus--same-indent-range)))
 
+;;;###autoload (autoload 'evil-indent-plus-a-indent "evil-indent-plus" nil t)
 (evil-define-text-object evil-indent-plus-a-indent (&optional count beg end type)
   "Text object describing the block with the same (or greater) indentation as the current line,
 skipping empty lines."
   :type line
   (evil-indent-plus--linify (evil-indent-plus--extend (evil-indent-plus--same-indent-range))))
 
+;;;###autoload (autoload 'evil-indent-plus-i-indent-up "evil-indent-plus" nil t)
 (evil-define-text-object evil-indent-plus-i-indent-up (&optional count beg end type)
   "Text object describing the block with the same (or greater) indentation as the current line,
 and the line above, skipping empty lines."
   :type line
   (evil-indent-plus--linify (evil-indent-plus--up-indent-range)))
 
+;;;###autoload (autoload 'evil-indent-plus-a-indent-up "evil-indent-plus" nil t)
 (evil-define-text-object evil-indent-plus-a-indent-up (&optional count beg end type)
   "Text object describing the block with the same (or greater) indentation as the current line,
 and the line above, skipping empty lines."
   :type line
   (evil-indent-plus--linify (evil-indent-plus--extend (evil-indent-plus--up-indent-range))))
 
+;;;###autoload (autoload 'evil-indent-plus-i-indent-up-down "evil-indent-plus" nil t)
 (evil-define-text-object evil-indent-plus-i-indent-up-down (&optional count beg end type)
   "Text object describing the block with the same (or greater) indentation as the current line,
 and the line above and below, skipping empty lines."
   :type line
   (evil-indent-plus--linify (evil-indent-plus--up-down-indent-range)))
 
+;;;###autoload (autoload 'evil-indent-plus-a-indent-up-down "evil-indent-plus" nil t)
 (evil-define-text-object evil-indent-plus-a-indent-up-down (&optional count beg end type)
   "Text object describing the block with the same (or greater) indentation as the current line,
 and the line above and below, skipping empty lines."
@@ -169,20 +175,14 @@ and the line above and below, skipping empty lines."
   (evil-indent-plus--linify (evil-indent-plus--extend (evil-indent-plus--up-down-indent-range))))
 
 ;;;###autoload
-(eval-after-load 'evil
-  '(progn
-     (autoload 'evil-indent-plus-i-indent "evil-indent-plus" nil t)
-     (autoload 'evil-indent-plus-a-indent "evil-indent-plus" nil t)
-     (autoload 'evil-indent-plus-i-indent-up "evil-indent-plus" nil t)
-     (autoload 'evil-indent-plus-a-indent-up "evil-indent-plus" nil t)
-     (autoload 'evil-indent-plus-i-indent-up-down "evil-indent-plus" nil t)
-     (autoload 'evil-indent-plus-a-indent-up-down "evil-indent-plus" nil t)
-     (define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
-     (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
-     (define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
-     (define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
-     (define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
-     (define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)))
+(defun evil-indent-plus-default-bindings ()
+  "Set the default evil-indent-plus keybindings."
+  (define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
+  (define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)
+  (define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
+  (define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
+  (define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
+  (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down))
 
 (provide 'evil-indent-plus)
 

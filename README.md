@@ -27,8 +27,26 @@ line above *and* below with less indentation.
 
 ## Usage
 
-Simply install the package. You should not have to load it explicitly, whether
-before or after evil loads. So long as the autoloads are handled, it will work.
+You can install the package and bind the auto-loadable text objects yourself:
+
+- `evil-indent-plus-i-indent`
+- `evil-indent-plus-a-indent`
+- `evil-indent-plus-i-indent-up`
+- `evil-indent-plus-a-indent-up`
+- `evil-indent-plus-i-indent-up-down`
+- `evil-indent-plus-a-indent-up-down`
+
+Or you can call `(evil-indent-plus-default-bindings)` to use the default
+bindings (listed above). They are:
+
+```elisp
+(define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
+(define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)
+(define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
+(define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
+(define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
+(define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down))
+```
 
 ## Differences from evil-indent-textobject
 
