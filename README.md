@@ -28,7 +28,7 @@ line above *and* below with less indentation.
 ## Usage
 
 Simply install the package. You should not have to load it explicitly, whether
-before or after evil loads.
+before or after evil loads. So long as the autoloads are handled, it will work.
 
 ## Differences from evil-indent-textobject
 
