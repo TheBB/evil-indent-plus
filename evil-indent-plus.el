@@ -6,7 +6,7 @@
 ;; Author: Eivind Fonn <evfonn@gmail.com>
 ;; Version: 1.0.0
 ;; Keywords: convenience evil
-;; URL: http://github.com/TheBB/evil-indent-textobject-plus
+;; URL: http://github.com/TheBB/evil-indent-plus
 ;; Package-Requires: ((evil "0"))
 ;;
 ;; This file is not part of GNU Emacs.
@@ -28,7 +28,7 @@
 
 ;;; Commentary:
 
-;; Adds new textobjects:
+;; Adds new text objects:
 ;;
 ;; ii, ai: Block of text with same or higher indentation
 ;; iI, aI: Block of text with same or higher indentation, including the first line
