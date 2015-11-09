@@ -5,6 +5,8 @@
 
 - [evil-indent-plus](#evil-indent-plus)
     - [Introduction](#introduction)
+    - [Usage](#usage)
+    - [Differences from evil-indent-textobject](#differences-from-evil-indent-textobject)
 
 <!-- markdown-toc end -->
 
