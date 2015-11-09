@@ -127,9 +127,9 @@ If `point' is supplied and non-nil it will return the begin and end of the block
   (let ((begin (cl-first range))
         (end (cl-second range))
         nend)
-    (setq nend (evil-plus-indent--seek end 1 t t 'evil-plus-indent--empty-line-p))
+    (setq nend (evil-indent-plus--seek end 1 t t 'evil-plus-indent--empty-line-p))
     (when (= nend end)
-      (setq begin (evil-plus-indent--seek begin -1 t t 'evil-plus-indent--empty-line-p)))
+      (setq begin (evil-indent-plus--seek begin -1 t t 'evil-plus-indent--empty-line-p)))
     (list begin nend)))
 
 (evil-define-text-object evil-indent-plus-i-indent (&optional count beg end type)
