@@ -1,5 +1,7 @@
 # evil-indent-plus
 
+[![MELPA](https://melpa.org/packages/evil-indent-plus-badge.svg)](https://melpa.org/#/evil-indent-plus)
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
