@@ -122,7 +122,7 @@ If `point' is supplied and non-nil it will return the begin and end of the block
 
 (defun evil-indent-plus--linify (range)
   (let ((nbeg (save-excursion (goto-char (cl-first range)) (point-at-bol)))
-        (nend (save-excursion (goto-char (cl-second range)) (point-at-eol))))
+        (nend (save-excursion (goto-char (cl-second range)) (1+ (point-at-eol)))))
     (evil-range nbeg nend 'line)))
 
 (defun evil-indent-plus--extend (range)
